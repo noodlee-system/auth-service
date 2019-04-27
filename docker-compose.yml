@@ -1,0 +1,31 @@
+version: '3.5'
+
+services:
+  backend:
+    container_name: noodlee-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    networks: 
+      - noodlee-backend-network
+
+  database:
+    container_name: noodlee-database
+    image: postgres:9.6
+    ports:
+      - '5432:5432'
+    networks:
+      - noodlee-backend-network
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 65xH-Ff*@xft_pUzg=@m
+    volumes:
+      - postgresql-volume:/var/lib/postgresql/data
+
+volumes:
+  postgresql-volume:
+
+networks:
+  noodlee-backend-network:
