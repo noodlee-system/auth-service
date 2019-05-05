@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 public class AuthController {
 
-    @CrossOrigin(origins = "http://localhost")
+    @CrossOrigin
     @PostMapping("/auth")
     public Map<String, String> auth(@RequestBody AuthRequestBody request) { 
         String username = request.getUsername();
