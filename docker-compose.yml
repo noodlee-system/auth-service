@@ -1,31 +1,37 @@
-version: '3.5'
+version: "3"
 
 services:
-  backend:
-    container_name: noodlee-backend
+  api:
+    container_name: auth-service_api
     build:
       context: .
       dockerfile: Dockerfile
+    image: auth-service
     ports:
-      - '8080:8080'
-    networks: 
-      - noodlee-backend-network
+      - "8080:8080"
+    depends_on: 
+      - database
+    networks:
+      - auth-service-network
+    restart: unless-stopped
 
   database:
-    container_name: noodlee-database
+    container_name: auth-service_database
     image: postgres:9.6
     ports:
-      - '5432:5432'
-    networks:
-      - noodlee-backend-network
+      - "5432:5432"
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 65xH-Ff*@xft_pUzg=@m
+      POSTGRES_PASSWORD: test123
+      POSTGRES_DB: authdb
     volumes:
       - postgresql-volume:/var/lib/postgresql/data
-
-volumes:
-  postgresql-volume:
+    networks:
+      - auth-service-network
 
 networks:
-  noodlee-backend-network:
+  auth-service-network:
+    driver: bridge
+    
+volumes:
+  postgresql-volume:

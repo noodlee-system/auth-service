@@ -1,4 +1,4 @@
-package com.noodleesystem.auth;
+package com.noodleesystem.auth.model;
 
 public class AuthRequestBody {
 	private String username;

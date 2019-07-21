@@ -1,5 +1,14 @@
-package com.noodleesystem.dataModels;
+package com.noodleesystem.auth.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="users")
 public class User {
     private int id;
     private String username;
@@ -11,7 +20,8 @@ public class User {
     public User(){
     }
 
-
+    @Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
     public int getId() {
         return id;
     }
@@ -20,6 +30,7 @@ public class User {
         this.id = id;
     }
 
+    @Column(name = "username", nullable = false)
     public String getUsername() {
         return username;
     }
@@ -28,6 +39,7 @@ public class User {
         this.username = username;
     }
 
+    @Column(name = "password", nullable = false)
     public String getPassword() {
         return password;
     }
@@ -36,6 +48,7 @@ public class User {
         this.password = password;
     }
 
+    @Column(name = "firstname", nullable = false)
     public String getFirstName() {
         return firstName;
     }
@@ -44,6 +57,7 @@ public class User {
         this.firstName = firstName;
     }
 
+    @Column(name = "lastname", nullable = false)
     public String getLastName() {
         return lastName;
     }
@@ -52,6 +66,7 @@ public class User {
         this.lastName = lastName;
     }
 
+    @Column(name = "email", nullable = false)
     public String getEmail() {
         return email;
     }
