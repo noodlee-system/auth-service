@@ -29,15 +29,11 @@ public class AuthController {
         String username = request.getUsername();
         HashMap<String, String> responseMap = new HashMap<>();
         
-        // generate mock token 
+        // generate mock token
+        responseMap.put("username", username);
         responseMap.put("token", "b3a5fed2-93c3-40d8-aa28-a0a0bd0391e3");
    
-        return responseMap; 
-    }
-
-    @GetMapping("/test")
-    public String getTestAnswer() {
-        return "test answer";
+        return responseMap;
     }
 
     @GetMapping("/employees")
