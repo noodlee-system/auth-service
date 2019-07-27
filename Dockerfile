@@ -5,7 +5,9 @@ COPY src /home/app/src
 
 COPY pom.xml /home/app
 
-RUN mvn -f /home/app/pom.xml clean install
+COPY settings.xml /home/app
+
+RUN mvn -f /home/app/pom.xml -s /home/app/settings.xml clean install -DskipTests=true
 
 # STEP 2 - SERVE JAVA APPLICATION USING JRE
 FROM openjdk:11-jre-slim

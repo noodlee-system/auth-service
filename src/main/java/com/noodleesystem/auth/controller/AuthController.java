@@ -11,17 +11,23 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.noodleesystem.auth.model.User;
 import com.noodleesystem.auth.model.AuthRequestBody;
 
 import com.noodleesystem.auth.repository.UserRepository;
+
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
   
 @RestController
 @RequestMapping("/api")
 public class AuthController {
     @Autowired
 	private UserRepository usersRepository;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @CrossOrigin
     @PostMapping("/auth")
@@ -40,4 +46,10 @@ public class AuthController {
 	public List<User> getAllUsers() {
 		return usersRepository.findAll();
 	}
+
+    @GetMapping("/addMessage")
+    public String get(@RequestParam String message) {
+        rabbitTemplate.convertAndSend("eggs", message);
+        return "Message sent";
+    }
 }

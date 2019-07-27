@@ -1,4 +1,4 @@
-version: "3"
+version: "3.5"
 
 services:
   api:
@@ -31,6 +31,7 @@ services:
 
 networks:
   auth-service-network:
+    name: noodlee-system-network
     driver: bridge
     
 volumes:
