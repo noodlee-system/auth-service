@@ -1,13 +1,21 @@
 # STEP 1 - BUILD JAVA APPLICATION USING MAVEN
 FROM maven:3.6.0-jdk-11-slim AS builder
 
-COPY src /home/app/src
+# SET APPLICATION WORK DIRECTORY
+WORKDIR /home/app/
 
-COPY pom.xml /home/app
+# COPY MAVEN DEPENDENCIES AND SETTINGS FILES
+COPY ./pom.xml ./pom.xml
+COPY ./settings.xml ./settings.xml
 
-COPY settings.xml /home/app
+# BUILD MAVEN DEPENDENCIES IN OFFLINE MODE
+RUN mvn -s ./settings.xml dependency:go-offline -B 
 
-RUN mvn -f /home/app/pom.xml -s /home/app/settings.xml clean install -DskipTests=true
+# COPY SOURCE CODE
+COPY ./src ./src
+
+# BUILD APPLICATION WITH TESTS SKIP
+RUN mvn -s ./settings.xml package -DskipTests=true
 
 # STEP 2 - SERVE JAVA APPLICATION USING JRE
 FROM openjdk:11-jre-slim
