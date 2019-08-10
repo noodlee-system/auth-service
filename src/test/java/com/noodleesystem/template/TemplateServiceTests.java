@@ -1,4 +1,4 @@
-package com.noodleesystem.auth;
+package com.noodleesystem.template;
 
 // import org.junit.Test;
 // import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ package com.noodleesystem.auth;
 
 // @RunWith(SpringRunner.class)
 // @SpringBootTest
-// public class AuthorizationServiceTests {
+// public class TemplateServiceTests {
 
 // 	@Test
 // 	public void contextLoads() {

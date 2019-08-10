@@ -1,4 +1,4 @@
-package com.noodleesystem.auth;
+package com.noodleesystem.template;
   
 import java.util.HashMap;
 import java.util.Map;
@@ -13,43 +13,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.noodleesystem.auth.model.User;
-import com.noodleesystem.auth.model.AuthRequestBody;
-
-import com.noodleesystem.auth.repository.UserRepository;
+import com.noodleesystem.template.model.User;
+import com.noodleesystem.template.repository.UserRepository;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
   
 @RestController
 @RequestMapping("/api")
-public class AuthController {
+public class TemplateController {
     @Autowired
 	private UserRepository usersRepository;
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    @CrossOrigin
-    @PostMapping("/auth")
-    public Map<String, String> auth(@RequestBody AuthRequestBody request) { 
-        String username = request.getUsername();
-        HashMap<String, String> responseMap = new HashMap<>();
-        
-        // generate mock token
-        responseMap.put("username", username);
-        responseMap.put("token", "b3a5fed2-93c3-40d8-aa28-a0a0bd0391e3");
-   
-        return responseMap;
-    }
-
-    @GetMapping("/employees")
+    @GetMapping("/users")
 	public List<User> getAllUsers() {
 		return usersRepository.findAll();
 	}
 
     @GetMapping("/addMessage")
     public String get(@RequestParam String message) {
-        rabbitTemplate.convertAndSend("eggs", message);
-        return "Message sent";
+        rabbitTemplate.convertAndSend("test", message);
+        return "Message sent into 'test' queue!";
+    }
+
+    @GetMapping("/receiveMessage")
+    public String get() {
+        Object message = rabbitTemplate.receiveAndConvert("test");
+        
+        if (message != null) {
+            return message.toString();
+        } else {
+            return "No message in queue 'test'!";
+        }
     }
 }

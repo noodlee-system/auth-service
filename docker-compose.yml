@@ -1,38 +1,38 @@
 version: "3.5"
 
 services:
-  api:
-    container_name: auth-service_api
+  template-service_api:
+    container_name: template-service_api
     build:
-      context: .
+      context: ./
       dockerfile: Dockerfile
-    image: auth-service
+    image: template-service
     ports:
       - "8080:8080"
-    depends_on: 
-      - database
+    depends_on:
+      - template-service_database
     networks:
-      - auth-service-network
+      - noodlee-system-network
     restart: unless-stopped
 
-  database:
-    container_name: auth-service_database
+  template-service_database:
+    container_name: template-service_database
     image: postgres:9.6
     ports:
       - "5432:5432"
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: test123
-      POSTGRES_DB: authdb
+      POSTGRES_PASSWORD: PdgDNLnlrr3NgshqwKJA
+      POSTGRES_DB: template_db
     volumes:
-      - postgresql-volume:/var/lib/postgresql/data
+      - template-service_database-volume:/var/lib/postgresql/data
     networks:
-      - auth-service-network
+      - noodlee-system-network
 
 networks:
-  auth-service-network:
+  noodlee-system-network:
     name: noodlee-system-network
     driver: bridge
     
 volumes:
-  postgresql-volume:
+  template-service_database-volume:

@@ -1,4 +1,4 @@
-package com.noodleesystem.auth;
+package com.noodleesystem.template;
 
 import static serilogj.sinks.coloredconsole.ColoredConsoleSinkConfigurator.*;
 import static serilogj.sinks.seq.SeqSinkConfigurator.*;
@@ -12,18 +12,18 @@ import serilogj.sinks.seq.SeqSink;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.noodleesystem.auth.model.User;
+import com.noodleesystem.template.model.User;
 
 @SpringBootApplication
-public class AuthorizationService {
+public class TemplateService {
 	public static void main(String[] args) {
 		Log.setLogger(new LoggerConfiguration()
 			.writeTo(coloredConsole())
 			.writeTo(seq("http://noodlee_seq:5341"))
 			.createLogger());
 
-		SpringApplication.run(AuthorizationService.class, args);
+		SpringApplication.run(TemplateService.class, args);
 
-		Log.information("{serviceName} is running...", "Authentication Service");
+		Log.information("{serviceName} is running...", "Template Service");
 	}
 }

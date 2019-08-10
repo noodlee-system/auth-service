@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.noodleesystem</groupId>
-	<artifactId>auth</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>auth</name>
-	<description>Noodlee System Authentication Service</description>
+	<artifactId>template</artifactId>
+	<version>1.0</version>
+	<name>template</name>
+	<description>Noodlee System Template Microservice</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

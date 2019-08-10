@@ -1,4 +1,4 @@
-package com.noodleesystem.auth.config;
+package com.noodleesystem.template.config;
 
 import static springfox.documentation.builders.PathSelectors.regex;
 import java.util.Collections;
@@ -20,14 +20,14 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2).select()
             .apis(RequestHandlerSelectors
-                .basePackage("com.noodleesystem.auth"))
+                .basePackage("com.noodleesystem.template"))
             .paths(PathSelectors.regex("/.*"))
             .build()
             .apiInfo(apiEndPointsInfo());
     }
     private ApiInfo apiEndPointsInfo() {
-        return new ApiInfoBuilder().title("Authentication Service REST API")
-            .description("Noodlee System Authentication Service REST API")
+        return new ApiInfoBuilder().title("Template Service REST API")
+            .description("Noodlee System Template Service REST API")
             .contact(new Contact("NoodleeSystem", "www.noodleesystem.com", "contact@noodleesystem.com"))
             .license("Apache 2.0")
             .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")

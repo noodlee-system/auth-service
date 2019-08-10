@@ -1,4 +1,4 @@
-package com.noodleesystem.auth.model;
+package com.noodleesystem.template.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,8 +17,7 @@ public class User {
     private String lastName;
     private String email;
 
-    public User(){
-    }
+    public User() { }
 
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
