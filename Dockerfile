@@ -13,7 +13,7 @@ COPY ./src ./src
 RUN mvn -s ./settings.xml package -DskipTests=true
 
 # STEP 2 - SERVE JAVA APPLICATION USING JRE
-FROM openjdk:11-jre-slim
+FROM java:8
 
 COPY --from=builder /home/app/target/template-1.0.jar /usr/local/lib/template-service.jar
 

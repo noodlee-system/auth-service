@@ -16,12 +16,14 @@ public class SerilogConfig {
     Environment env;
 
     @Bean()
-    public void setSerilogConfiguration() {
+    public String setSerilogConfiguration() {
         final String serverUrl = env.getProperty("seq.server.url");
 
         Log.setLogger(new LoggerConfiguration()
                 .writeTo(coloredConsole())
                 .writeTo(seq(serverUrl))
                 .createLogger());
+
+        return serverUrl;
     }
 }

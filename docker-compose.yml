@@ -13,7 +13,6 @@ services:
       - template-service_database
     networks:
       - noodlee-system-network
-    restart: unless-stopped
 
   template-service_database:
     container_name: template-service_database
